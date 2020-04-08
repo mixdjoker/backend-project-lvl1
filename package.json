@@ -1,0 +1,23 @@
+{
+  "name": "backend-project-lvl1",
+  "version": "1.0.0",
+  "description": "Hexlet studing project",
+  "main": "src/index.js",
+  "type": "module",
+  "bin": {
+    "brain-games": "bin/brain-games.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mixdjoker/backend-project-lvl1.git"
+  },
+  "author": "Mikhail Orlov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mixdjoker/backend-project-lvl1/issues"
+  },
+  "homepage": "https://github.com/mixdjoker/backend-project-lvl1#readme"
+}
