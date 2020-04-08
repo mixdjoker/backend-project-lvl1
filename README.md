@@ -10,7 +10,7 @@ This is the first project in Node.JS training
 make install
 ```
 
-## Lockal install
+## Local install
 
 ```sh
 sudo npm link
