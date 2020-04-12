@@ -15,6 +15,8 @@ cd backend-project-lvl1
 make install
 ```
 
+[![asciicast](https://asciinema.org/a/318860.svg)](https://asciinema.org/a/318860)
+
 ### Uninstall
 
 ```sh
@@ -32,3 +34,11 @@ or
 ```sh
 brain-even
 ```
+
+### Playaer win
+
+[![asciicast](https://asciinema.org/a/318847.svg)](https://asciinema.org/a/318847)
+
+### Player lose
+
+[![asciicast](https://asciinema.org/a/318851.svg)](https://asciinema.org/a/318851)
