@@ -20,25 +20,38 @@ make install
 ### Uninstall
 
 ```sh
-sudo npm rm --global backend-project-lvl1
+make uninstall
+cd .. && rm -rf backend-project-lvl1
 ```
 
 ## Usage
+
+To run all games:
 
 ```sh
 brain-games
 ```
 
-or
+### Brain Game: Parity-check
 
 ```sh
 brain-even
 ```
 
-### Playaer win
+#### Player Parity-game win
 
 [![asciicast](https://asciinema.org/a/318847.svg)](https://asciinema.org/a/318847)
 
-### Player lose
+#### Player Parity-game lose
 
 [![asciicast](https://asciinema.org/a/318851.svg)](https://asciinema.org/a/318851)
+
+### Brain Game: Calculator
+
+#### Player Calc-game win
+
+[![asciicast](https://asciinema.org/a/319507.svg)](https://asciinema.org/a/319507)
+
+#### Player Calc-game lose
+
+[![asciicast](https://asciinema.org/a/319508.svg)](https://asciinema.org/a/319508)

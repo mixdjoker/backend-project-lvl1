@@ -50,10 +50,15 @@ const checkUserAnswer = (maxNumber) => {
   return correctAnswer;
 };
 
-const startGame = () => {
+/**
+ * @param {number} maxAttempts
+ * @param {number} maxRandomNumber
+ * @param {string} userName
+ */
+// eslint-disable-next-line no-unused-vars
+const startGame = (maxAttempts, maxRandomNumber, userName) => {
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
-  const maxAttempts = 3;
-  const maxRandomNumber = 100;
+
   let rightAnswers = 0;
 
   for (;;) {
