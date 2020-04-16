@@ -1,12 +1,8 @@
 // @ts-check
 import readlineSync from 'readline-sync';
+import getRandomInt from './randomint.js';
 
 export const greatText = 'Find the greatest common divisor of given numbers.';
-
-/**
- * @param {number} max
- */
-const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
 
 /**
  * @param {number} aNum
@@ -20,7 +16,10 @@ const gcd = (aNum, bNum) => {
   return gcd(bNum, aNum % bNum);
 };
 
-export const checkUserAnswer = (maxNumber) => {
+export /**
+ * @param {number} maxNumber
+ */
+const checkUserAnswer = (maxNumber) => {
   const firstNumber = getRandomInt(maxNumber);
   const secondNumber = getRandomInt(maxNumber);
 

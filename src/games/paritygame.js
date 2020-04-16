@@ -1,5 +1,6 @@
 // @ts-check
 import readlineSync from 'readline-sync';
+import getRandomInt from './randomint.js';
 
 export const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
 
@@ -7,11 +8,6 @@ export const greatText = 'Answer "yes" if the number is even, otherwise answer "
  * @param {number} inputNumber
  */
 const checkParity = (inputNumber) => ((inputNumber % 2) === 0);
-
-/**
- * @param {number} max
- */
-const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
 
 /**
  * @param {number} inputNumber

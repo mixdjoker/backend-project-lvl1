@@ -5,12 +5,14 @@ import readlineSync from 'readline-sync';
 import { greatText as parityText, checkUserAnswer as parityGame } from './games/paritygame.js';
 import { greatText as calcText, checkUserAnswer as calcGame } from './games/calcgame.js';
 import { greatText as gcdText, checkUserAnswer as gcdGame } from './games/gcdgame.js';
+import { greatText as prgText, checkUserAnswer as prgGame } from './games/progressiongame.js';
 
 // List of game objects
 const games = [
   [parityText, parityGame],
   [calcText, calcGame],
   [gcdText, gcdGame],
+  [prgText, prgGame],
 ];
 
 // Common game Greate

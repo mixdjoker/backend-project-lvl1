@@ -1,12 +1,8 @@
 // @ts-check
 import readlineSync from 'readline-sync';
+import getRandomInt from './randomint.js';
 
 export const greatText = 'What is the result of the expression?';
-
-/**
- * @param {number} max
- */
-const getRandomInt = (max) => Math.floor(Math.random() * Math.floor(max));
 
 const mathCase = {
   0: '+',
