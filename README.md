@@ -55,3 +55,7 @@ brain-even
 #### Player Calc-game lose
 
 [![asciicast](https://asciinema.org/a/319508.svg)](https://asciinema.org/a/319508)
+
+#### Player GCD-game win
+
+[![asciicast](https://asciinema.org/a/320600.svg)](https://asciinema.org/a/320600)
