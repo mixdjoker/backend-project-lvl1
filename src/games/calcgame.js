@@ -22,7 +22,6 @@ export const checkUserAnswer = (maxRnd, user) => {
   const firstNumber = getRandomInt(maxRnd);
   const secondNumber = getRandomInt(maxRnd);
   const mathAction = getRandomInt(3);
-
   let mathResult = 0;
 
   switch (mathAction) {
