@@ -1,6 +1,8 @@
 // @ts-check
 import readlineSync from 'readline-sync';
 
+export const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
+
 /**
  * @param {number} inputNumber
  */
@@ -28,7 +30,7 @@ const getCorrectAnswer = (inputNumber, userChoise) => {
 /**
  * @param {number} maxNumber
  */
-const checkUserAnswer = (maxNumber) => {
+export const checkUserAnswer = (maxNumber) => {
   // game logic
   let correctAnswer = false;
   const queryNumber = getRandomInt(maxNumber);
@@ -49,28 +51,3 @@ const checkUserAnswer = (maxNumber) => {
 
   return correctAnswer;
 };
-
-/**
- * @param {number} maxAttempts
- * @param {number} maxRandomNumber
- * @param {string} userName
- */
-// eslint-disable-next-line no-unused-vars
-const startGame = (maxAttempts, maxRandomNumber, userName) => {
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
-
-  let rightAnswers = 0;
-
-  for (;;) {
-    if (checkUserAnswer(maxRandomNumber)) {
-      rightAnswers += 1;
-    } else {
-      rightAnswers = 0;
-    }
-    if (rightAnswers === maxAttempts) {
-      break;
-    }
-  }
-};
-
-export default startGame;

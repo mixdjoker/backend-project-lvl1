@@ -1,6 +1,8 @@
 // @ts-check
 import readlineSync from 'readline-sync';
 
+export const greatText = 'What is the result of the expression?';
+
 /**
  * @param {number} max
  */
@@ -16,7 +18,7 @@ const mathCase = {
  * @param {number} maxRnd
  * @param {string} user
  */
-const checkUserAnswer = (maxRnd, user) => {
+export const checkUserAnswer = (maxRnd, user) => {
   const firstNumber = getRandomInt(maxRnd);
   const secondNumber = getRandomInt(maxRnd);
   const mathAction = getRandomInt(3);
@@ -48,27 +50,3 @@ const checkUserAnswer = (maxRnd, user) => {
   console.log(`Let's try again, ${user}!`);
   return false;
 };
-
-/**
- * @param {number} maxAttempts
- * @param {number} maxRandomNumber
- * @param {string} userName
- */
-const startGame = (maxAttempts, maxRandomNumber, userName) => {
-  console.log('What is the result of the expression?');
-
-  let rightAnswers = 0;
-
-  for (;;) {
-    if (checkUserAnswer(maxRandomNumber, userName)) {
-      rightAnswers += 1;
-    } else {
-      rightAnswers = 0;
-    }
-    if (rightAnswers === maxAttempts) {
-      break;
-    }
-  }
-};
-
-export default startGame;
