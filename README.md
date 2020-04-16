@@ -59,3 +59,7 @@ brain-even
 #### Player GCD-game win
 
 [![asciicast](https://asciinema.org/a/320600.svg)](https://asciinema.org/a/320600)
+
+#### Player Progression win
+
+[![asciicast](https://asciinema.org/a/320658.svg)](https://asciinema.org/a/320658)
