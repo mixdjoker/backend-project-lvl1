@@ -16,10 +16,10 @@ const gcd = (aNum, bNum) => {
   return gcd(bNum, aNum % bNum);
 };
 
-export /**
+/**
  * @param {number} maxNumber
  */
-const checkUserAnswer = (maxNumber) => {
+export const checkUserAnswer = (maxNumber) => {
   const firstNumber = getRandomInt(maxNumber);
   const secondNumber = getRandomInt(maxNumber);
 
