@@ -63,3 +63,7 @@ brain-even
 #### Player Progression win
 
 [![asciicast](https://asciinema.org/a/320658.svg)](https://asciinema.org/a/320658)
+
+### Prime Game gameplay
+
+[![asciicast](https://asciinema.org/a/321047.svg)](https://asciinema.org/a/321047)

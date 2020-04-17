@@ -6,6 +6,7 @@ import { greatText as parityText, checkUserAnswer as parityGame } from './games/
 import { greatText as calcText, checkUserAnswer as calcGame } from './games/calcgame.js';
 import { greatText as gcdText, checkUserAnswer as gcdGame } from './games/gcdgame.js';
 import { greatText as prgText, checkUserAnswer as prgGame } from './games/progressiongame.js';
+import { greatText as prmText, checkUserAnswer as prmGame } from './games/primegame.js';
 
 // List of game objects
 const games = [
@@ -13,6 +14,7 @@ const games = [
   [calcText, calcGame],
   [gcdText, gcdGame],
   [prgText, prgGame],
+  [prmText, prmGame],
 ];
 
 // Common game Greate
