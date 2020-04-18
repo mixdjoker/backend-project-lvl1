@@ -5,22 +5,30 @@ import getRandomInt from './randomint.js';
 export const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
 
 /**
- * @param {number} inputNumber
+ * @param {number} num
  */
-const checkParity = (inputNumber) => ((inputNumber % 2) === 0);
+const isEvenNumber = (num) => ((num % 2) === 0);
 
 /**
- * @param {number} inputNumber
- * @param {boolean} userChoise
+ * @param {number} numToCheck
+ * @param {boolean} rightAnswer
  */
-const getCorrectAnswer = (inputNumber, userChoise) => {
-  let returnValue = false;
-  if (checkParity(inputNumber) === userChoise) {
-    returnValue = true;
+const isAnswerCorrect = (numToCheck, rightAnswer) => {
+  if (isEvenNumber(numToCheck) === rightAnswer) {
     console.log('Correct!');
+    return true;
   }
+  return false;
+};
 
-  return returnValue;
+/**
+ * @param {number} numToShow
+ */
+const getUserAnswer = (numToShow) => {
+  console.log(`Question: ${numToShow}`);
+  const userInput = readlineSync.question('Your answer: ');
+
+  return userInput;
 };
 
 /**
@@ -30,16 +38,14 @@ export const checkUserAnswer = (maxNumber) => {
   // game logic
   let correctAnswer = false;
   const queryNumber = getRandomInt(maxNumber);
-
-  console.log(`Question: ${queryNumber}`);
-  const userAnswerStr = readlineSync.question('Your answer: ');
+  const userAnswerStr = getUserAnswer(queryNumber);
 
   switch (userAnswerStr) {
     case 'yes':
-      correctAnswer = getCorrectAnswer(queryNumber, true);
+      correctAnswer = isAnswerCorrect(queryNumber, true);
       break;
     case 'no':
-      correctAnswer = getCorrectAnswer(queryNumber, false);
+      correctAnswer = isAnswerCorrect(queryNumber, false);
       break;
     default:
       return false;

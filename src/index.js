@@ -6,7 +6,7 @@ import { greatText as parityText, checkUserAnswer as parityGame } from './games/
 import { greatText as calcText, checkUserAnswer as calcGame } from './games/calcgame.js';
 import { greatText as gcdText, checkUserAnswer as gcdGame } from './games/gcdgame.js';
 import { greatText as prgText, checkUserAnswer as prgGame } from './games/progressiongame.js';
-import { greatText as prmText, checkUserAnswer as prmGame } from './games/primegame.js';
+import { greatText as primeText, checkUserAnswer as primeGame } from './games/primegame.js';
 
 // List of game objects
 const games = [
@@ -14,27 +14,27 @@ const games = [
   [calcText, calcGame],
   [gcdText, gcdGame],
   [prgText, prgGame],
-  [prmText, prmGame],
+  [primeText, primeGame],
 ];
 
-// Common game Greate
-const gameGreat = () => {
+// General game greeting
+const startGameGreeting = () => {
   const helloText = 'Welcome to the Brain Games!';
   let userName = 'Default User';
   console.log(helloText);
   userName = readlineSync.question('May I have your name? ');
 
-  const greatText = `Hello, ${userName}!`;
-  console.log(greatText);
+  const greetingText = `Hello, ${userName}!`;
+  console.log(greetingText);
 
   return userName;
 };
 
-// Common game Exit
+// General game exit
 /**
  * @param {string} userName
  */
-const gameExit = (userName) => {
+const endGame = (userName) => {
   console.log(`Congratulations, ${userName}!`);
   return 0;
 };
@@ -65,24 +65,24 @@ const gameEngine = (selectedGame, gameMaxAttempts, gameRandomNumber, userName) =
 };
 
 /**
- * @param {number} [gameChoise]
+ * @param {number} [gameNumber]
  */
-const gameStart = (gameChoise) => {
+const startGame = (gameNumber) => {
   const maxAttempts = 3;
   const maxRandomNumber = 100;
 
-  const user = gameGreat();
+  const user = startGameGreeting();
 
-  if (gameChoise === 0) {
+  if (gameNumber === 0) {
     for (const game of games) {
       gameEngine(game, maxAttempts, maxRandomNumber, user);
     }
   } else {
-    const game = gameChoise - 1;
+    const game = gameNumber - 1;
     gameEngine(games[game], maxAttempts, maxRandomNumber, user);
   }
 
-  gameExit(user);
+  endGame(user);
 };
 
-export default gameStart;
+export default startGame;

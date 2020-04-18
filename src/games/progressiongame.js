@@ -10,7 +10,7 @@ export const greatText = 'What number is missing in the progression?';
  * @param {number} delta
  * @param {number} length
  */
-const getArithmArray = (first, delta, length) => {
+const getArithmRange = (first, delta, length) => {
   const arr = [];
 
   for (let i = 0; i < length; i += 1) {
@@ -59,7 +59,7 @@ export const checkUserAnswer = () => {
   const prgDelta = getRandomCel(prgMinDelta, prgMaxDelta);
   const prgMisIndex = getRandomCel(0, prgLength - 1);
 
-  const arithmProgres = getArithmArray(firstElement, prgDelta, prgLength);
+  const arithmProgres = getArithmRange(firstElement, prgDelta, prgLength);
   const showString = getUserArithmStr(arithmProgres, prgMisIndex);
   const missElement = arithmProgres[prgMisIndex];
 
