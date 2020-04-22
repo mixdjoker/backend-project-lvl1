@@ -1,14 +1,16 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-restricted-syntax */
 // @ts-check
 
 import readlineSync from 'readline-sync';
+// Delete after refactoring
 import { greatText as parityText, checkUserAnswer as parityGame } from './games/paritygame.js';
 import { greatText as calcText, checkUserAnswer as calcGame } from './games/calcgame.js';
 import { greatText as gcdText, checkUserAnswer as gcdGame } from './games/gcdgame.js';
 import { greatText as prgText, checkUserAnswer as prgGame } from './games/progressiongame.js';
 import { greatText as primeText, checkUserAnswer as primeGame } from './games/primegame.js';
 
-// List of game objects
+// Delete after refactoring
 const games = [
   [parityText, parityGame],
   [calcText, calcGame],
@@ -17,36 +19,111 @@ const games = [
   [primeText, primeGame],
 ];
 
-// General game greeting
-const startGameGreeting = () => {
+// CLI Section
+
+/**
+ * @param {string} text
+ */
+const cliOutput = (text) => {
+  console.log(text);
+};
+
+/**
+ * @param {string} text
+ */
+const cliInput = (text) => {
+  const input = readlineSync.question(`${text} `);
+  return input;
+};
+
+// Display Section
+
+/**
+ * @param {string} text
+ */
+export const displayString = (text) => {
+  cliOutput(text);
+};
+
+/**
+ * @param {string} promptString
+ */
+export const requestString = (promptString) => {
+  const input = cliInput(promptString);
+  return input;
+};
+
+// Game Utils
+
+/**
+ * @param {any[]} args
+ */
+export const getRandomInt = (...args) => {
+  if (args.length === 1) {
+    const [max] = args;
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
+  if (args.length === 2) {
+    const [inMin, inMax] = args;
+    const min = Math.ceil(inMin);
+    const max = Math.floor(inMax);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+};
+
+export const startGameGreeting = () => {
   const helloText = 'Welcome to the Brain Games!';
   let userName = 'Default User';
-  console.log(helloText);
-  userName = readlineSync.question('May I have your name? ');
-
+  displayString(helloText);
+  userName = requestString('May I have your name?');
   const greetingText = `Hello, ${userName}!`;
-  console.log(greetingText);
+  displayString(greetingText);
 
   return userName;
 };
 
-// General game exit
 /**
  * @param {string} userName
  */
-const endGame = (userName) => {
-  console.log(`Congratulations, ${userName}!`);
-  return 0;
+export const endGame = (userName) => {
+  const byeString = `Congratulations, ${userName}!`;
+  displayString(byeString);
 };
 
-// Common game engine
+// New engine logic
+
+/**
+ * @param {string} gameName
+ * @param {(arg?: any) => boolean} gameFunction
+ * @param {any[]} gameParams
+ */
+export const engineGame = (gameName, gameFunction, ...gameParams) => {
+  const gameMaxAttempts = 3;
+  let rightAnswers = 0;
+  displayString(gameName);
+  for (;;) {
+    if (gameFunction(...gameParams)) {
+      rightAnswers += 1;
+    } else {
+      rightAnswers = 0;
+    }
+    if (rightAnswers === gameMaxAttempts) {
+      break;
+    }
+  }
+};
+
+// Delete after refactoring Section
+
+// Old game engine logic
 /**
  * @param {any[]} selectedGame
  * @param {number} gameMaxAttempts
  * @param {number} gameRandomNumber
  * @param {string} userName
  */
-const gameEngine = (selectedGame, gameMaxAttempts, gameRandomNumber, userName) => {
+const playGame = (selectedGame, gameMaxAttempts, gameRandomNumber, userName) => {
   const gameParams = [gameRandomNumber, userName];
   let rightAnswers = 0;
 
@@ -75,11 +152,11 @@ const startGame = (gameNumber) => {
 
   if (gameNumber === 0) {
     for (const game of games) {
-      gameEngine(game, maxAttempts, maxRandomNumber, user);
+      playGame(game, maxAttempts, maxRandomNumber, user);
     }
   } else {
     const game = gameNumber - 1;
-    gameEngine(games[game], maxAttempts, maxRandomNumber, user);
+    playGame(games[game], maxAttempts, maxRandomNumber, user);
   }
 
   endGame(user);

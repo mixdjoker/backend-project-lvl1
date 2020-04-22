@@ -1,7 +1,6 @@
 // @ts-check
 import readlineSync from 'readline-sync';
-import getRandomInt from './randomint.js';
-import getRandomCel from './randomintcel.js';
+import getRandomInt from '../randomint.js';
 
 export const greatText = 'What number is missing in the progression?';
 
@@ -56,8 +55,8 @@ export const checkUserAnswer = () => {
   const prgMaxDelta = 19;
 
   const firstElement = getRandomInt(maxRandomFirstElement);
-  const prgDelta = getRandomCel(prgMinDelta, prgMaxDelta);
-  const prgMisIndex = getRandomCel(0, prgLength - 1);
+  const prgDelta = getRandomInt(prgMinDelta, prgMaxDelta);
+  const prgMisIndex = getRandomInt(0, prgLength - 1);
 
   const arithmProgres = getArithmRange(firstElement, prgDelta, prgLength);
   const showString = getUserArithmStr(arithmProgres, prgMisIndex);

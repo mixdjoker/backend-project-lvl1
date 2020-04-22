@@ -1,6 +1,6 @@
 // @ts-check
 import readlineSync from 'readline-sync';
-import getRandomInt from './randomint.js';
+import getRandomInt from '../randomint.js';
 
 export const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
 
