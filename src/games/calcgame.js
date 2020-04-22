@@ -2,7 +2,7 @@
 // @ts-check
 import {
   displayString, requestString,
-  startGameGreeting, endGame, engineGame,
+  commonGameStart,
   getRandomInt,
 } from '../index.js';
 
@@ -48,23 +48,21 @@ const checkUserAnswer = (maxRnd, user) => {
 
   displayString(queryText);
   const userAnswer = requestString(promptText);
+  const comparedUserAnswerText = `"${userAnswer}" is wrong answer ;(. Correct answer was "${mathResult.toString()}".`;
 
   if (mathResult === Number(userAnswer)) {
     displayString(correctAnswerText);
     return true;
   }
 
-  const compareUserAnswerText = `"${userAnswer}" is wrong answer ;(. Correct answer was "${mathResult.toString()}".`;
-  displayString(compareUserAnswerText);
+  displayString(comparedUserAnswerText);
   displayString(wrongAnswerText);
   return false;
 };
 
 const calcGameStart = () => {
   const greatText = 'What is the result of the expression?';
-  const user = startGameGreeting();
-  engineGame(greatText, checkUserAnswer, user);
-  endGame(user);
+  commonGameStart(greatText, checkUserAnswer);
 };
 
 export default calcGameStart;

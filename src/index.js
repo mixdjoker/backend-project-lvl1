@@ -5,15 +5,12 @@
 import readlineSync from 'readline-sync';
 // Delete after refactoring
 import { greatText as parityText, checkUserAnswer as parityGame } from './games/paritygame.js';
-// import { greatText as calcText, checkUserAnswer as calcGame } from './games/calcgame.js';
-import { greatText as gcdText, checkUserAnswer as gcdGame } from './games/gcdgame.js';
 import { greatText as prgText, checkUserAnswer as prgGame } from './games/progressiongame.js';
 import { greatText as primeText, checkUserAnswer as primeGame } from './games/primegame.js';
 
 // Delete after refactoring
 const games = [
   [parityText, parityGame],
-  [gcdText, gcdGame],
   [prgText, prgGame],
   [primeText, primeGame],
 ];
@@ -113,6 +110,16 @@ export const engineGame = (gameName, gameFunction, ...gameParams) => {
       break;
     }
   }
+};
+
+/**
+ * @param {string} greatText
+ * @param {any} gameFunction
+ */
+export const commonGameStart = (greatText, gameFunction) => {
+  const user = startGameGreeting();
+  engineGame(greatText, gameFunction, user);
+  endGame(user);
 };
 
 // Delete after refactoring Section

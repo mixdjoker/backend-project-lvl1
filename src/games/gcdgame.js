@@ -1,8 +1,9 @@
 // @ts-check
-import readlineSync from 'readline-sync';
-import getRandomInt from '../randomint.js';
-
-export const greatText = 'Find the greatest common divisor of given numbers.';
+import {
+  displayString, requestString,
+  commonGameStart,
+  getRandomInt,
+} from '../index.js';
 
 /**
  * @param {number} aNum
@@ -21,24 +22,35 @@ const gcd = (aNum, bNum) => {
  * @param {number} secondNum
  */
 const getUserAnswer = (firstNum, secondNum) => {
-  console.log(`Question: ${firstNum} ${secondNum}`);
-  const userOutput = readlineSync.question('Your answer: ');
+  const queryText = `Question: ${firstNum} ${secondNum}`;
+  const promptText = 'Your answer:';
+
+  displayString(queryText);
+  const userOutput = requestString(promptText);
 
   return Number(userOutput);
 };
 
 /**
- * @param {number} maxNumber
+ * @param {number} maxRnd
  */
-export const checkUserAnswer = (maxNumber) => {
-  const firstNumber = getRandomInt(maxNumber);
-  const secondNumber = getRandomInt(maxNumber);
+const checkUserAnswer = (maxRnd) => {
+  const firstNumber = getRandomInt(maxRnd);
+  const secondNumber = getRandomInt(maxRnd);
   const userNumber = getUserAnswer(firstNumber, secondNumber);
   const rightResult = gcd(firstNumber, secondNumber);
+  const correctAnswerText = 'Correct!';
 
   if (userNumber === rightResult) {
-    console.log('Correct!');
+    displayString(correctAnswerText);
     return true;
   }
   return false;
 };
+
+const gcdGameStart = () => {
+  const greatText = 'Find the greatest common divisor of given numbers.';
+  commonGameStart(greatText, checkUserAnswer);
+};
+
+export default gcdGameStart;
