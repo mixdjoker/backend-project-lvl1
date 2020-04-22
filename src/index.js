@@ -3,17 +3,12 @@
 // @ts-check
 
 import readlineSync from 'readline-sync';
-// Delete after refactoring
-import { greatText as parityText, checkUserAnswer as parityGame } from './games/paritygame.js';
-import { greatText as prgText, checkUserAnswer as prgGame } from './games/progressiongame.js';
-import { greatText as primeText, checkUserAnswer as primeGame } from './games/primegame.js';
 
-// Delete after refactoring
-const games = [
-  [parityText, parityGame],
-  [prgText, prgGame],
-  [primeText, primeGame],
-];
+// Strings Section
+
+export const defaultPromptText = 'Your answer:';
+export const defaultCorrectAnswerText = 'Correct!';
+export const defaultQuestionText = 'Question:';
 
 // CLI Section
 
@@ -88,6 +83,30 @@ export const endGame = (userName) => {
   displayString(byeString);
 };
 
+
+/**
+ * @param {string} text
+ * @param {string} promptQuestionText
+ */
+export const showUserQuestion = (text, promptQuestionText = defaultQuestionText) => {
+  displayString(`${promptQuestionText} ${text}`);
+};
+
+export const showUserCorrect = () => displayString(defaultCorrectAnswerText);
+
+/**
+ * @param {string} questionText
+ * @param {string} promptText
+ */
+export const getUserAnswer = (questionText, promptText = defaultPromptText) => {
+  showUserQuestion(questionText);
+  // displayString(questionText);
+  const userInput = requestString(promptText);
+
+  return userInput;
+};
+
+
 // New engine logic
 
 /**
@@ -121,53 +140,3 @@ export const commonGameStart = (greatText, gameFunction) => {
   engineGame(greatText, gameFunction, user);
   endGame(user);
 };
-
-// Delete after refactoring Section
-
-// Old game engine logic
-/**
- * @param {any[]} selectedGame
- * @param {number} gameMaxAttempts
- * @param {number} gameRandomNumber
- * @param {string} userName
- */
-const playGame = (selectedGame, gameMaxAttempts, gameRandomNumber, userName) => {
-  const gameParams = [gameRandomNumber, userName];
-  let rightAnswers = 0;
-
-  console.log(selectedGame[0]);
-
-  for (;;) {
-    if (selectedGame[1](...gameParams)) {
-      rightAnswers += 1;
-    } else {
-      rightAnswers = 0;
-    }
-    if (rightAnswers === gameMaxAttempts) {
-      break;
-    }
-  }
-};
-
-/**
- * @param {number} [gameNumber]
- */
-const startGame = (gameNumber) => {
-  const maxAttempts = 3;
-  const maxRandomNumber = 100;
-
-  const user = startGameGreeting();
-
-  if (gameNumber === 0) {
-    for (const game of games) {
-      playGame(game, maxAttempts, maxRandomNumber, user);
-    }
-  } else {
-    const game = gameNumber - 1;
-    playGame(games[game], maxAttempts, maxRandomNumber, user);
-  }
-
-  endGame(user);
-};
-
-export default startGame;

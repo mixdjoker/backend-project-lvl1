@@ -1,8 +1,9 @@
 // @ts-check
-import readlineSync from 'readline-sync';
-import getRandomInt from '../randomint.js';
-
-export const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
+import {
+  getUserAnswer, showUserCorrect,
+  commonGameStart,
+  getRandomInt,
+} from '../index.js';
 
 /**
  * @param {number} num
@@ -10,46 +11,28 @@ export const greatText = 'Answer "yes" if the number is even, otherwise answer "
 const isEvenNumber = (num) => ((num % 2) === 0);
 
 /**
- * @param {number} numToCheck
- * @param {boolean} rightAnswer
+ * @param {number} maxRnd
  */
-const isAnswerCorrect = (numToCheck, rightAnswer) => {
-  if (isEvenNumber(numToCheck) === rightAnswer) {
-    console.log('Correct!');
+const checkUserAnswer = (maxRnd) => {
+  const queryNumber = getRandomInt(maxRnd);
+  const userAnswerStr = getUserAnswer(queryNumber.toString());
+
+  if ((userAnswerStr === 'yes') && (isEvenNumber(queryNumber) === true)) {
+    showUserCorrect();
     return true;
   }
+
+  if ((userAnswerStr === 'no') && (isEvenNumber(queryNumber) === false)) {
+    showUserCorrect();
+    return true;
+  }
+
   return false;
 };
 
-/**
- * @param {number} numToShow
- */
-const getUserAnswer = (numToShow) => {
-  console.log(`Question: ${numToShow}`);
-  const userInput = readlineSync.question('Your answer: ');
-
-  return userInput;
+const parityGameStart = () => {
+  const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
+  commonGameStart(greatText, checkUserAnswer);
 };
 
-/**
- * @param {number} maxNumber
- */
-export const checkUserAnswer = (maxNumber) => {
-  // game logic
-  let correctAnswer = false;
-  const queryNumber = getRandomInt(maxNumber);
-  const userAnswerStr = getUserAnswer(queryNumber);
-
-  switch (userAnswerStr) {
-    case 'yes':
-      correctAnswer = isAnswerCorrect(queryNumber, true);
-      break;
-    case 'no':
-      correctAnswer = isAnswerCorrect(queryNumber, false);
-      break;
-    default:
-      return false;
-  }
-
-  return correctAnswer;
-};
+export default parityGameStart;
