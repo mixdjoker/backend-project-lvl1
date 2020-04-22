@@ -1,9 +1,10 @@
 /* eslint-disable consistent-return */
 // @ts-check
-import readlineSync from 'readline-sync';
-import getRandomInt from '../randomint.js';
-
-export const greatText = 'What is the result of the expression?';
+import {
+  displayString, requestString,
+  startGameGreeting, endGame, engineGame,
+  getRandomInt,
+} from '../index.js';
 
 const getRandomAction = () => {
   const mathCase = {
@@ -26,30 +27,44 @@ const getRandomAction = () => {
  */
 const getMathResult = (action, firstNumber, secondNumber) => {
   if (action === '+') return firstNumber + secondNumber;
-  if (action === '-') return firstNumber + secondNumber;
-  if (action === '*') return firstNumber + secondNumber;
+  if (action === '-') return firstNumber - secondNumber;
+  if (action === '*') return firstNumber * secondNumber;
 };
 
 /**
  * @param {number} maxRnd
  * @param {string} user
  */
-export const checkUserAnswer = (maxRnd, user) => {
+const checkUserAnswer = (maxRnd, user) => {
   const firstNumber = getRandomInt(maxRnd);
   const secondNumber = getRandomInt(maxRnd);
   const mathSymbol = getRandomAction();
   const mathResult = getMathResult(mathSymbol, firstNumber, secondNumber);
 
   const queryText = `Question: ${firstNumber} ${mathSymbol} ${secondNumber}`;
+  const promptText = 'Your answer:';
+  const correctAnswerText = 'Correct!';
+  const wrongAnswerText = `Let's try again, ${user}!`;
 
-  console.log(queryText); // вынести в index.js
-  const userAnswer = readlineSync.question('Your answer: '); // вынести в index.js
+  displayString(queryText);
+  const userAnswer = requestString(promptText);
 
   if (mathResult === Number(userAnswer)) {
-    console.log('Correct!'); // вынести в index.js
+    displayString(correctAnswerText);
     return true;
   }
-  console.log(`"${userAnswer}" is wrong answer ;(. Correct answer was "${mathResult.toString()}".`); // вынести в index.js
-  console.log(`Let's try again, ${user}!`); // вынести в index.js
+
+  const compareUserAnswerText = `"${userAnswer}" is wrong answer ;(. Correct answer was "${mathResult.toString()}".`;
+  displayString(compareUserAnswerText);
+  displayString(wrongAnswerText);
   return false;
 };
+
+const calcGameStart = () => {
+  const greatText = 'What is the result of the expression?';
+  const user = startGameGreeting();
+  engineGame(greatText, checkUserAnswer, user);
+  endGame(user);
+};
+
+export default calcGameStart;

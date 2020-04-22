@@ -5,7 +5,7 @@
 import readlineSync from 'readline-sync';
 // Delete after refactoring
 import { greatText as parityText, checkUserAnswer as parityGame } from './games/paritygame.js';
-import { greatText as calcText, checkUserAnswer as calcGame } from './games/calcgame.js';
+// import { greatText as calcText, checkUserAnswer as calcGame } from './games/calcgame.js';
 import { greatText as gcdText, checkUserAnswer as gcdGame } from './games/gcdgame.js';
 import { greatText as prgText, checkUserAnswer as prgGame } from './games/progressiongame.js';
 import { greatText as primeText, checkUserAnswer as primeGame } from './games/primegame.js';
@@ -13,7 +13,6 @@ import { greatText as primeText, checkUserAnswer as primeGame } from './games/pr
 // Delete after refactoring
 const games = [
   [parityText, parityGame],
-  [calcText, calcGame],
   [gcdText, gcdGame],
   [prgText, prgGame],
   [primeText, primeGame],
@@ -74,9 +73,10 @@ export const getRandomInt = (...args) => {
 
 export const startGameGreeting = () => {
   const helloText = 'Welcome to the Brain Games!';
-  let userName = 'Default User';
+  const defaultUserName = 'Default User';
   displayString(helloText);
-  userName = requestString('May I have your name?');
+  const userInput = requestString('May I have your name?');
+  const userName = (userInput === '') ? defaultUserName : userInput;
   const greetingText = `Hello, ${userName}!`;
   displayString(greetingText);
 
@@ -95,15 +95,16 @@ export const endGame = (userName) => {
 
 /**
  * @param {string} gameName
- * @param {(arg?: any) => boolean} gameFunction
+ * @param {any} gameFunction
  * @param {any[]} gameParams
  */
 export const engineGame = (gameName, gameFunction, ...gameParams) => {
   const gameMaxAttempts = 3;
+  const maxRandomNumber = 100;
   let rightAnswers = 0;
   displayString(gameName);
   for (;;) {
-    if (gameFunction(...gameParams)) {
+    if (gameFunction(maxRandomNumber, ...gameParams)) {
       rightAnswers += 1;
     } else {
       rightAnswers = 0;
