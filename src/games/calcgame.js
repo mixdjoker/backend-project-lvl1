@@ -1,10 +1,12 @@
 /* eslint-disable consistent-return */
 // @ts-check
 import {
-  displayString, requestString,
+  getUserAnswer, showUserCorrect, showUserWrong,
   commonGameStart,
   getRandomInt,
 } from '../index.js';
+
+const greatText = 'What is the result of the expression?';
 
 const getRandomAction = () => {
   const mathCase = {
@@ -40,29 +42,17 @@ const checkUserAnswer = (maxRnd, user) => {
   const secondNumber = getRandomInt(maxRnd);
   const mathSymbol = getRandomAction();
   const mathResult = getMathResult(mathSymbol, firstNumber, secondNumber);
+  const questionText = `${firstNumber} ${mathSymbol} ${secondNumber}`;
 
-  const queryText = `Question: ${firstNumber} ${mathSymbol} ${secondNumber}`;
-  const promptText = 'Your answer:';
-  const correctAnswerText = 'Correct!';
-  const wrongAnswerText = `Let's try again, ${user}!`;
-
-  displayString(queryText);
-  const userAnswer = requestString(promptText);
-  const comparedUserAnswerText = `"${userAnswer}" is wrong answer ;(. Correct answer was "${mathResult.toString()}".`;
+  const userAnswer = getUserAnswer(questionText);
 
   if (mathResult === Number(userAnswer)) {
-    displayString(correctAnswerText);
+    showUserCorrect();
     return true;
   }
 
-  displayString(comparedUserAnswerText);
-  displayString(wrongAnswerText);
+  showUserWrong(user, userAnswer, mathResult);
   return false;
 };
 
-const calcGameStart = () => {
-  const greatText = 'What is the result of the expression?';
-  commonGameStart(greatText, checkUserAnswer);
-};
-
-export default calcGameStart;
+export default () => commonGameStart(greatText, checkUserAnswer);

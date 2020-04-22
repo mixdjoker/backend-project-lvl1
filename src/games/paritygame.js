@@ -5,6 +5,8 @@ import {
   getRandomInt,
 } from '../index.js';
 
+const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
+
 /**
  * @param {number} num
  */
@@ -30,9 +32,4 @@ const checkUserAnswer = (maxRnd) => {
   return false;
 };
 
-const parityGameStart = () => {
-  const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
-  commonGameStart(greatText, checkUserAnswer);
-};
-
-export default parityGameStart;
+export default () => commonGameStart(greatText, checkUserAnswer);

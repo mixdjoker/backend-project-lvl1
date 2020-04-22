@@ -1,6 +1,9 @@
 // @ts-check
-import readlineSync from 'readline-sync';
-import getRandomInt from '../randomint.js';
+import {
+  getUserAnswer, showUserCorrect,
+  commonGameStart,
+  getRandomInt,
+} from '../index.js';
 
 export const greatText = 'What number is missing in the progression?';
 
@@ -38,16 +41,6 @@ const getUserArithmStr = (arr, misElementIndex) => {
   return strArr.join(' ');
 };
 
-/**
- * @param {string} showString
- * @param {number} askedNumber
- */
-const getUserAnswer = (showString, askedNumber) => {
-  console.log(`Question: ${showString}`);
-  const answer = Number(readlineSync.question('Your answer: '));
-  return answer === askedNumber;
-};
-
 export const checkUserAnswer = () => {
   const prgLength = 10;
   const maxRandomFirstElement = 10;
@@ -60,11 +53,14 @@ export const checkUserAnswer = () => {
 
   const arithmProgres = getArithmRange(firstElement, prgDelta, prgLength);
   const showString = getUserArithmStr(arithmProgres, prgMisIndex);
-  const missElement = arithmProgres[prgMisIndex];
+  const missedElement = arithmProgres[prgMisIndex];
+  const userAnswerStr = getUserAnswer(showString);
 
-  if (getUserAnswer(showString, missElement)) {
-    console.log('Correct!');
+  if (Number(userAnswerStr) === missedElement) {
+    showUserCorrect();
     return true;
   }
   return false;
 };
+
+export default () => commonGameStart(greatText, checkUserAnswer);

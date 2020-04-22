@@ -4,13 +4,13 @@
 
 import readlineSync from 'readline-sync';
 
-// Strings Section
+// Globals Section
 
 export const defaultPromptText = 'Your answer:';
 export const defaultCorrectAnswerText = 'Correct!';
 export const defaultQuestionText = 'Question:';
 
-// CLI Section
+// CLI Output Section
 
 /**
  * @param {string} text
@@ -92,7 +92,34 @@ export const showUserQuestion = (text, promptQuestionText = defaultQuestionText)
   displayString(`${promptQuestionText} ${text}`);
 };
 
-export const showUserCorrect = () => displayString(defaultCorrectAnswerText);
+/**
+ * @param {any[]} params
+ * @param {string} userCorrectText
+ */
+export const showUserCorrect = (userCorrectText = defaultCorrectAnswerText, ...params) => {
+  const [displayFunction = displayString] = params;
+  displayFunction(userCorrectText);
+};
+
+/**
+ * @param {string} user
+ * @param {string} userAnswer
+ * @param {number} rightAnswer
+ * @param {any[]} params
+ */
+export const showUserWrong = (user, userAnswer, rightAnswer, ...params) => {
+  const defaultWrongText = `Let's try again, ${user}!`;
+  const defaultComparedText = `"${userAnswer}" is wrong answer ;(. Correct answer was "${rightAnswer}".`;
+
+  const [
+    displayFunction = displayString,
+    wrongText = defaultWrongText,
+    comparedUserAnswerText = defaultComparedText,
+  ] = params;
+
+  displayFunction(comparedUserAnswerText);
+  displayFunction(wrongText);
+};
 
 /**
  * @param {string} questionText
@@ -140,3 +167,5 @@ export const commonGameStart = (greatText, gameFunction) => {
   engineGame(greatText, gameFunction, user);
   endGame(user);
 };
+
+export default startGameGreeting;

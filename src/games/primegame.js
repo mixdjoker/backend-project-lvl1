@@ -1,6 +1,9 @@
 // @ts-check
-import readlineSync from 'readline-sync';
-import getRandomInt from '../randomint.js';
+import {
+  getUserAnswer, showUserCorrect,
+  commonGameStart,
+  getRandomInt,
+} from '../index.js';
 
 export const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
 
@@ -21,25 +24,23 @@ const isPrime = (num) => {
 };
 
 /**
- * @param {number} number
+ * @param {number} maxRnd
  */
-const isUserCorrect = (number) => {
-  console.log(`Question: ${number}`);
-  const userInput = readlineSync.question('Your answer: ') === 'yes';
+export const checkUserAnswer = (maxRnd) => {
+  const randomNumber = getRandomInt(maxRnd);
+  const userAnswerStr = getUserAnswer(randomNumber.toString());
 
-  return isPrime(number) === userInput;
-};
+  if ((userAnswerStr === 'yes') && (isPrime(randomNumber) === true)) {
+    showUserCorrect();
+    return true;
+  }
 
-/**
- * @param {number} maxNumber
- */
-export const checkUserAnswer = (maxNumber) => {
-  const rndInt = getRandomInt(maxNumber);
-
-  if (isUserCorrect(rndInt)) {
-    console.log('Correct!');
+  if ((userAnswerStr === 'no') && (isPrime(randomNumber) === false)) {
+    showUserCorrect();
     return true;
   }
 
   return false;
 };
+
+export default () => commonGameStart(greatText, checkUserAnswer);
