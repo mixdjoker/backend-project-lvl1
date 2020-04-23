@@ -5,7 +5,8 @@
 import readlineSync from 'readline-sync';
 
 // Globals Section
-
+const gameMaxAttempts = 3;
+const maxRandomNumber = 100;
 export const defaultPromptText = 'Your answer:';
 export const defaultCorrectAnswerText = 'Correct!';
 export const defaultQuestionText = 'Question:';
@@ -141,8 +142,6 @@ export const getUserAnswer = (questionText, promptText = defaultPromptText) => {
  * @param {any[]} gameParams
  */
 export const engineGame = (gameName, gameFunction, ...gameParams) => {
-  const gameMaxAttempts = 3;
-  const maxRandomNumber = 100;
   let rightAnswers = 0;
   displayString(gameName);
   for (;;) {
