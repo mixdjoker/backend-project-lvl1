@@ -143,15 +143,16 @@ export const getUserAnswer = (questionText, promptText = defaultPromptText) => {
  */
 export const engineGame = (gameName, gameFunction, ...gameParams) => {
   let rightAnswers = 0;
+  let continueGame = true;
   displayString(gameName);
-  for (;;) {
+  while (continueGame) {
     if (gameFunction(maxRandomNumber, ...gameParams)) {
       rightAnswers += 1;
     } else {
       rightAnswers = 0;
     }
     if (rightAnswers === gameMaxAttempts) {
-      break;
+      continueGame = false;
     }
   }
 };
