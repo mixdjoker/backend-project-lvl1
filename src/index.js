@@ -5,8 +5,7 @@
 import readlineSync from 'readline-sync';
 
 // Globals Section
-const gameMaxAttempts = 3;
-const maxRandomNumber = 100;
+
 export const defaultPromptText = 'Your answer:';
 export const defaultCorrectAnswerText = 'Correct!';
 export const defaultQuestionText = 'Question:';
@@ -137,16 +136,18 @@ export const getUserAnswer = (questionText, promptText = defaultPromptText) => {
 // New engine logic
 
 /**
- * @param {string} gameName
  * @param {any} gameFunction
  * @param {any[]} gameParams
  */
-export const engineGame = (gameName, gameFunction, ...gameParams) => {
+export const engineGame = (gameFunction, ...gameParams) => {
   let rightAnswers = 0;
   let continueGame = true;
-  displayString(gameName);
+  const gameMaxAttempts = 3;
+  const maxRandomNumber = 100;
+
   while (continueGame) {
-    if (gameFunction(maxRandomNumber, ...gameParams)) {
+    const answer = gameFunction(maxRandomNumber, ...gameParams);
+    if (answer) {
       rightAnswers += 1;
     } else {
       rightAnswers = 0;
@@ -163,7 +164,8 @@ export const engineGame = (gameName, gameFunction, ...gameParams) => {
  */
 export const commonGameStart = (greatText, gameFunction) => {
   const user = startGameGreeting();
-  engineGame(greatText, gameFunction, user);
+  displayString(greatText);
+  engineGame(gameFunction, user);
   endGame(user);
 };
 
