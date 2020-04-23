@@ -133,7 +133,6 @@ export const getUserAnswer = (questionText, promptText = defaultPromptText) => {
   return userInput;
 };
 
-
 // New engine logic
 
 /**

@@ -26,10 +26,10 @@ const checkUserAnswer = (maxRnd) => {
   const firstNumber = getRandomInt(maxRnd);
   const secondNumber = getRandomInt(maxRnd);
   const questionText = `${firstNumber} ${secondNumber}`;
-  const userNumber = getUserAnswer(questionText);
+  const userAnswerStr = getUserAnswer(questionText);
   const rightResult = gcd(firstNumber, secondNumber);
 
-  if (userNumber === rightResult) {
+  if (Number(userAnswerStr) === rightResult) {
     showUserCorrect();
     return true;
   }
