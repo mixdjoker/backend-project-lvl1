@@ -5,12 +5,12 @@
   "main": "src/index.js",
   "type": "module",
   "bin": {
-    "brain-games": "bin/brain-games.js",
-    "brain-even": "bin/brain-even.js",
-    "brain-calc": "bin/brain-calc.js",
-    "brain-gcd": "bin/brain-gcd.js",
-    "brain-progression": "bin/brain-progression.js",
-    "brain-prime": "bin/brain-prime.js"
+    "brain-games": "bin/games.js",
+    "brain-even": "bin/even.js",
+    "brain-calc": "bin/calc.js",
+    "brain-gcd": "bin/gcd.js",
+    "brain-progression": "bin/progression.js",
+    "brain-prime": "bin/prime.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,58 +1,47 @@
-/* eslint-disable consistent-return */
+/* eslint-disable max-len */
 // @ts-check
-import {
-  getUserAnswer, showUserCorrect, showUserWrong,
-  commonGameStart,
-  getRandomInt,
-} from '../index.js';
 
-const greatText = 'What is the result of the expression?';
+import { getRandomInt, getRandomIntSet, startGame } from '../index.js';
 
-const getRandomAction = () => {
+const getMathResult = (action, firstNumber, secondNumber) => {
+  let result = 0;
+  switch (action) {
+    case '+': result = firstNumber + secondNumber;
+      break;
+    case '-': result = firstNumber - secondNumber;
+      break;
+    case '*': result = firstNumber * secondNumber;
+      break;
+    default:
+  }
+
+  return result;
+};
+
+const gameLogic = (maxRndNumber) => {
   const mathCase = {
     0: '+',
     1: '-',
     2: '*',
   };
 
-  const actionCount = 3;
-  const selectedAction = getRandomInt(actionCount);
-  const selectedSymbol = mathCase[selectedAction];
+  const commonParams = {
+    questionStrings: [],
+    rightAnswer: undefined,
+  };
 
-  return selectedSymbol;
+  const numbers = [];
+  const numbersCount = 2;
+  const mathSymbol = mathCase[getRandomInt(Object.keys(mathCase).length)];
+
+  const rndNumbesSet = getRandomIntSet(numbersCount, maxRndNumber);
+  numbers.push(...rndNumbesSet);
+  commonParams.questionStrings.push(numbers[0], mathSymbol, numbers[1]);
+  commonParams.rightAnswer = getMathResult(mathSymbol, ...numbers);
+
+  return commonParams;
 };
 
-/**
- * @param {string} action
- * @param {number} [firstNumber]
- * @param {number} [secondNumber]
- */
-const getMathResult = (action, firstNumber, secondNumber) => {
-  if (action === '+') return firstNumber + secondNumber;
-  if (action === '-') return firstNumber - secondNumber;
-  if (action === '*') return firstNumber * secondNumber;
-};
+const greatText = 'What is the result of the expression?';
 
-/**
- * @param {number} maxRnd
- * @param {string} user
- */
-const checkUserAnswer = (maxRnd, user) => {
-  const firstNumber = getRandomInt(maxRnd);
-  const secondNumber = getRandomInt(maxRnd);
-  const mathSymbol = getRandomAction();
-  const mathResult = getMathResult(mathSymbol, firstNumber, secondNumber);
-  const questionText = `${firstNumber} ${mathSymbol} ${secondNumber}`;
-
-  const userAnswer = getUserAnswer(questionText);
-
-  if (mathResult === Number(userAnswer)) {
-    showUserCorrect();
-    return true;
-  }
-
-  showUserWrong(user, userAnswer, mathResult);
-  return false;
-};
-
-export default () => commonGameStart(greatText, checkUserAnswer);
+export default () => startGame(greatText, gameLogic);
