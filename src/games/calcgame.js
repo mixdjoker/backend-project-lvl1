@@ -30,12 +30,10 @@ const gameLogic = (maxRndNumber) => {
     rightAnswer: undefined,
   };
 
-  const numbers = [];
   const numbersCount = 2;
+  const numbers = getRandomIntSet(numbersCount, maxRndNumber);
   const mathSymbol = mathCase[getRandomInt(Object.keys(mathCase).length)];
 
-  const rndNumbesSet = getRandomIntSet(numbersCount, maxRndNumber);
-  numbers.push(...rndNumbesSet);
   commonParams.questionStrings.push(numbers[0], mathSymbol, numbers[1]);
   commonParams.rightAnswer = getMathResult(mathSymbol, ...numbers);
 

@@ -1,16 +1,6 @@
 // @ts-check
-import {
-  getUserAnswer, showUserCorrect,
-  commonGameStart,
-  getRandomInt,
-} from '../index.js';
+import { getRandomIntSet, startGame } from '../index.js';
 
-const greatText = 'Find the greatest common divisor of given numbers.';
-
-/**
- * @param {number} aNum
- * @param {number} bNum
- */
 const gcd = (aNum, bNum) => {
   if (bNum === 0) {
     return aNum;
@@ -19,21 +9,20 @@ const gcd = (aNum, bNum) => {
   return gcd(bNum, aNum % bNum);
 };
 
-/**
- * @param {number} maxRnd
- */
-const checkUserAnswer = (maxRnd) => {
-  const firstNumber = getRandomInt(maxRnd);
-  const secondNumber = getRandomInt(maxRnd);
-  const questionText = `${firstNumber} ${secondNumber}`;
-  const userAnswerStr = getUserAnswer(questionText);
-  const rightResult = gcd(firstNumber, secondNumber);
+const gameLogic = (maxRndNumber) => {
+  const commonParams = {
+    questionStrings: [],
+    rightAnswer: undefined,
+  };
+  const numbersCount = 2;
+  const numbers = getRandomIntSet(numbersCount, maxRndNumber);
 
-  if (Number(userAnswerStr) === rightResult) {
-    showUserCorrect();
-    return true;
-  }
-  return false;
+  commonParams.questionStrings.push(...numbers);
+  commonParams.rightAnswer = gcd(...numbers);
+
+  return commonParams;
 };
 
-export default () => commonGameStart(greatText, checkUserAnswer);
+const greatText = 'Find the greatest common divisor of given numbers.';
+
+export default () => startGame(greatText, gameLogic);

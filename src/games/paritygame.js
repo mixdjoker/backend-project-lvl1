@@ -1,35 +1,21 @@
 // @ts-check
-import {
-  getUserAnswer, showUserCorrect,
-  commonGameStart,
-  getRandomInt,
-} from '../index.js';
+import { getRandomInt, startGame } from '../index.js';
 
 const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
 
-/**
- * @param {number} num
- */
 const isEvenNumber = (num) => ((num % 2) === 0);
 
-/**
- * @param {number} maxRnd
- */
-const checkUserAnswer = (maxRnd) => {
-  const queryNumber = getRandomInt(maxRnd);
-  const userAnswerStr = getUserAnswer(queryNumber.toString());
+const gameLogic = (maxRndNumber) => {
+  const commonParams = {
+    questionStrings: [],
+    rightAnswer: undefined,
+  };
 
-  if ((userAnswerStr === 'yes') && (isEvenNumber(queryNumber) === true)) {
-    showUserCorrect();
-    return true;
-  }
+  const number = getRandomInt(maxRndNumber);
+  commonParams.questionStrings.push(number);
+  commonParams.rightAnswer = (isEvenNumber(number)) ? 'yes' : 'no';
 
-  if ((userAnswerStr === 'no') && (isEvenNumber(queryNumber) === false)) {
-    showUserCorrect();
-    return true;
-  }
-
-  return false;
+  return commonParams;
 };
 
-export default () => commonGameStart(greatText, checkUserAnswer);
+export default () => startGame(greatText, gameLogic);
