@@ -26,7 +26,7 @@ const gameLogic = (maxRndNumber) => {
   };
 
   const commonParams = {
-    questionStrings: [],
+    questionElements: [],
     rightAnswer: undefined,
   };
 
@@ -34,7 +34,7 @@ const gameLogic = (maxRndNumber) => {
   const numbers = getRandomIntSet(numbersCount, maxRndNumber);
   const mathSymbol = mathCase[getRandomInt(Object.keys(mathCase).length)];
 
-  commonParams.questionStrings.push(numbers[0], mathSymbol, numbers[1]);
+  commonParams.questionElements.push(numbers[0], mathSymbol, numbers[1]);
   commonParams.rightAnswer = getMathResult(mathSymbol, ...numbers);
 
   return commonParams;

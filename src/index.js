@@ -35,9 +35,9 @@ export const getRandomIntSet = (numSetCount, ...args) => {
 const gameConsts = {
   helloText: 'Welcome to the Brain Games!',
   defaultUserName: 'Default User',
-  nameQuestion: 'May I have your name?',
+  nameQuestion: 'May I have your name? ',
   questionPrompt: 'Question:',
-  defaultPromptText: 'Your answer:',
+  defaultPromptText: 'Your answer: ',
   correctAnswerString: 'Correct!',
   maxAttemptsCount: 3,
   maxRandomNumber: 100,
@@ -74,9 +74,11 @@ const isUserRight = (gameVariables) => {
   return false;
 };
 
-const setWrongAnswerstring = (gameVariables) => {
-  gameVariables.wrongAnswerStrings.push(`Let's try again, ${gameVariables.userName}!\n`);
-  gameVariables.wrongAnswerStrings.push(`"${gameVariables.userAnswer}" is wrong answer ;(. Correct answer was "${gameVariables.rightAnswer}".`);
+const setWrongAnswerStrings = (gameVariables) => {
+  const strings = [];
+  strings.push(`Let's try again, ${gameVariables.userName}!\n`);
+  strings.push(`"${gameVariables.userAnswer}" is wrong answer ;(. Correct answer was "${gameVariables.rightAnswer}".`);
+  gameVariables.wrongAnswerStrings = [...strings];
 };
 
 const getUserName = () => {
@@ -94,11 +96,11 @@ const engineGame = (gameLogic, gameVariables) => {
   let continueToPlay = true;
 
   while (continueToPlay) {
-    const { rightAnswer, questionStrings, needToShowWrong = false } = gameLogic(gameConsts.maxRandomNumber);
+    const { rightAnswer, questionElements, needToShowWrong = false } = gameLogic(gameConsts.maxRandomNumber);
     gameVariables.rightAnswer = rightAnswer;
-    gameVariables.userAnswer = getUserAnswer(gameConsts.defaultPromptText, gameConsts.questionPrompt, ...questionStrings);
+    gameVariables.userAnswer = getUserAnswer(gameConsts.defaultPromptText, gameConsts.questionPrompt, ...questionElements);
 
-    setWrongAnswerstring(gameVariables);
+    setWrongAnswerStrings(gameVariables);
     const check = isUserRight(gameVariables);
 
     if (check) {
@@ -106,7 +108,7 @@ const engineGame = (gameLogic, gameVariables) => {
       displayString(gameConsts.correctAnswerString);
     } else {
       rightAnswerCount = 0;
-      if (needToShowWrong) displayString(gameVariables.wrongAnswerStrings);
+      if (needToShowWrong) displayString(...gameVariables.wrongAnswerStrings);
     }
 
     if (rightAnswerCount === gameConsts.maxAttemptsCount) {

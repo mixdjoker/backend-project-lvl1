@@ -11,13 +11,13 @@ const gcd = (aNum, bNum) => {
 
 const gameLogic = (maxRndNumber) => {
   const commonParams = {
-    questionStrings: [],
+    questionElements: [],
     rightAnswer: undefined,
   };
   const numbersCount = 2;
   const numbers = getRandomIntSet(numbersCount, maxRndNumber);
 
-  commonParams.questionStrings.push(...numbers);
+  commonParams.questionElements.push(...numbers);
   commonParams.rightAnswer = gcd(...numbers);
 
   return commonParams;

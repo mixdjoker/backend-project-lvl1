@@ -7,12 +7,13 @@ const isEvenNumber = (num) => ((num % 2) === 0);
 
 const gameLogic = (maxRndNumber) => {
   const commonParams = {
-    questionStrings: [],
+    questionElements: [],
     rightAnswer: undefined,
+    needToShowWrong: true,
   };
 
   const number = getRandomInt(maxRndNumber);
-  commonParams.questionStrings.push(number);
+  commonParams.questionElements.push(number);
   commonParams.rightAnswer = (isEvenNumber(number)) ? 'yes' : 'no';
 
   return commonParams;

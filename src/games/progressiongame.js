@@ -1,17 +1,8 @@
 // @ts-check
-import {
-  getUserAnswer, showUserCorrect,
-  commonGameStart,
-  getRandomInt,
-} from '../index.js';
+import { getRandomInt, startGame } from '../index.js';
 
-export const greatText = 'What number is missing in the progression?';
+const greatText = 'What number is missing in the progression?';
 
-/**
- * @param {number} first
- * @param {number} delta
- * @param {number} length
- */
 const getArithmRange = (first, delta, length) => {
   const arr = [];
 
@@ -23,25 +14,26 @@ const getArithmRange = (first, delta, length) => {
   return arr;
 };
 
-/**
- * @param {any[]} arr
- * @param {number} misElementIndex
- */
-const getUserArithmStr = (arr, misElementIndex) => {
-  const strArr = [];
+const getQuestionElements = (arr, misElementIndex) => {
+  const elements = [];
   for (let i = 0; i < arr.length; i += 1) {
     const element = arr[i];
     if (i === misElementIndex) {
-      strArr.push('..');
+      elements.push('..');
     } else {
-      strArr.push(element);
+      elements.push(element);
     }
   }
 
-  return strArr.join(' ');
+  return elements;
 };
 
-export const checkUserAnswer = () => {
+const gameLogic = () => {
+  const commonParams = {
+    questionElements: [],
+    rightAnswer: undefined,
+  };
+
   const prgLength = 10;
   const maxRandomFirstElement = 10;
   const prgMinDelta = 3;
@@ -52,15 +44,10 @@ export const checkUserAnswer = () => {
   const prgMisIndex = getRandomInt(0, prgLength - 1);
 
   const arithmProgres = getArithmRange(firstElement, prgDelta, prgLength);
-  const showString = getUserArithmStr(arithmProgres, prgMisIndex);
-  const missedElement = arithmProgres[prgMisIndex];
-  const userAnswerStr = getUserAnswer(showString);
+  commonParams.questionElements = [...getQuestionElements(arithmProgres, prgMisIndex)];
+  commonParams.rightAnswer = arithmProgres[prgMisIndex];
 
-  if (Number(userAnswerStr) === missedElement) {
-    showUserCorrect();
-    return true;
-  }
-  return false;
+  return commonParams;
 };
 
-export default () => commonGameStart(greatText, checkUserAnswer);
+export default () => startGame(greatText, gameLogic);

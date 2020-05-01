@@ -1,15 +1,8 @@
 // @ts-check
-import {
-  getUserAnswer, showUserCorrect,
-  commonGameStart,
-  getRandomInt,
-} from '../index.js';
+import { getRandomInt, startGame } from '../index.js';
 
-export const greatText = 'Answer "yes" if the number is even, otherwise answer "no".';
+const greatText = 'Answer "yes" if the number is prime, otherwise answer "no".';
 
-/**
- * @param {number} num
- */
 const isPrime = (num) => {
   if (num <= 1) {
     return false;
@@ -23,24 +16,17 @@ const isPrime = (num) => {
   return true;
 };
 
-/**
- * @param {number} maxRnd
- */
-export const checkUserAnswer = (maxRnd) => {
-  const randomNumber = getRandomInt(maxRnd);
-  const userAnswerStr = getUserAnswer(randomNumber.toString());
+const gameLogic = (maxRndNumber) => {
+  const commonParams = {
+    questionElements: [],
+    rightAnswer: undefined,
+  };
 
-  if ((userAnswerStr === 'yes') && (isPrime(randomNumber) === true)) {
-    showUserCorrect();
-    return true;
-  }
+  const number = getRandomInt(maxRndNumber);
+  commonParams.questionElements.push(number);
+  commonParams.rightAnswer = (isPrime(number)) ? 'yes' : 'no';
 
-  if ((userAnswerStr === 'no') && (isPrime(randomNumber) === false)) {
-    showUserCorrect();
-    return true;
-  }
-
-  return false;
+  return commonParams;
 };
 
-export default () => commonGameStart(greatText, checkUserAnswer);
+export default () => startGame(greatText, gameLogic);
